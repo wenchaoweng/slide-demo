@@ -1,14 +1,20 @@
 var allButtons = $('#buttons > span')
+let timerId = setTimer()
 
 for (let i = 0; i < allButtons.length; i++) {
   $(allButtons[i]).on('click', function(x) {
     var index = $(x.currentTarget).index()
     var p = index * -400
+
+    window.clearInterval(timerId)
+
     $('#images').css({
       transform: 'translate(' + p + 'px)'
     })
     n = index
     activeButton(allButtons.eq(n))
+
+    timerId = setTimer()
   })
 }
 
@@ -19,7 +25,7 @@ var size = allButtons.length
 allButtons.eq(n % size).trigger('click')
 
 
-var timerId = setTimer()
+
 
 function setTimer() {
   return setInterval(() => {
